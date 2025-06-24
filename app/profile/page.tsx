@@ -55,7 +55,7 @@ const ProfilePage = () => {
                     <Button
                       key={plan._id}
                       onClick={() => setSelectedPlanId(plan._id)}
-                      className={`text-foreground border hover:text-white text-sm ${
+                      className={`text-gray-500 border hover:text-white text-sm ${
                         selectedPlanId === plan._id
                           ? "bg-primary/20 text-gray-500 border-primary"
                           : "bg-transparent border-border hover:border-primary/50"
