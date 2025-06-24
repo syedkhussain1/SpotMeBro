@@ -45,6 +45,7 @@ const GenerateProgramPage = () => {
     }
   };
   const handleError = (error: any) => {
+    console.log("error - ", error);
     setIsConnecting(false);
     setIsCallActive(false);
   };
@@ -117,6 +118,7 @@ const GenerateProgramPage = () => {
           process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID! // workflow ID
         );
       } catch (error) {
+        console.log("error - ", error);
         setIsConnecting(false);
         setIsCallActive(false);
       }
