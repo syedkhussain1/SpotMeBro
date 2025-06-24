@@ -36,7 +36,6 @@ const GenerateProgramPage = () => {
     setIsAiSpeaking(true);
   };
   const handleSpeechEnd = () => {
-    console.log("AI speech ended");
     setIsAiSpeaking(false);
   };
   const handleMessage = (message: any) => {
@@ -46,7 +45,6 @@ const GenerateProgramPage = () => {
     }
   };
   const handleError = (error: any) => {
-    console.log("error", error);
     setIsConnecting(false);
     setIsCallActive(false);
   };
@@ -88,7 +86,7 @@ const GenerateProgramPage = () => {
       }, 3000);
       return () => clearTimeout(redirectTimer);
     }
-  }, [isCallEnded]);
+  }, [isCallEnded, router]);
 
   const toggleCall = async () => {
     if (isCallActive) {
@@ -99,8 +97,7 @@ const GenerateProgramPage = () => {
         setIsAiMessage([]);
         setIsCallEnded(false);
 
-        // console.log("user - ", user?.id);
-        let userId = user?.id;
+        const userId = user?.id;
 
         const fullName = user?.fullName
           ? `${user.fullName} ${user.lastName || ""}`.trim()
@@ -112,17 +109,14 @@ const GenerateProgramPage = () => {
             user_id: userId, // user coming from clerk
           },
         };
-        console.log("assistantOverrides - ", assistantOverrides);
 
-        const call = await vapi.start(
+        await vapi.start(
           undefined, // no assistant
           assistantOverrides, // pass user_id and full_name to workflow
           undefined, // no squad
           process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID! // workflow ID
         );
-        console.log("Hey call has started - ", call);
       } catch (error) {
-        console.log("error", error);
         setIsConnecting(false);
         setIsCallActive(false);
       }

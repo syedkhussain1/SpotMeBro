@@ -76,7 +76,6 @@ http.route({
         "svix-signature": svix_signature,
       }) as WebhookEvent;
     } catch (err) {
-      console.error("Error verifying webhook:", err);
       return new Response("Error occurred", { status: 400 });
     }
 
@@ -98,7 +97,6 @@ http.route({
           clerkId: id,
         });
       } catch (error) {
-        console.log("Error creating user:", error);
         return new Response("Error creating user", { status: 500 });
       }
     }
@@ -118,7 +116,6 @@ http.route({
           image: image_url,
         });
       } catch (error) {
-        console.log("Error updating user:", error);
         return new Response("Error updating user", { status: 500 });
       }
     }
@@ -133,10 +130,7 @@ http.route({
   handler: httpAction(async (ctx, request) => {
     try {
       const payload = await request.json();
-      console.log("Context - ", ctx);
-      console.log("payload - ", payload);
       const x = ctx.auth.getUserIdentity();
-      console.log("x - ", x);
       const {
         user_id,
         age,
@@ -162,8 +156,6 @@ http.route({
       //     }
       //   );
       // }
-
-      console.log("payload: " + payload);
 
       // send request to Gemini
       const model = genAI.getGenerativeModel({
@@ -299,7 +291,6 @@ http.route({
         }
       );
     } catch (error) {
-      console.error("Error generating fitness plan:", error);
       return new Response(
         JSON.stringify({
           success: false,

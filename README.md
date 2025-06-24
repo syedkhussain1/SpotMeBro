@@ -3,6 +3,7 @@
 This Project is called SpotMrBro. This a helpful workout buddy app where you can request a voice assistant to create a personalize workout routine for your needs
 
 Tech Stack - Nextjs
+AI - VAPI (voice AI), Gemini
 UI - Shadcn-ui, Taiwind CSS
 Authentication - Clerk
 DB - Convex
