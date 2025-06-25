@@ -1,9 +1,14 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import UserPlan from "@/components/UserPlan";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 const HomePage = () => {
+  const { isSignedIn } = useUser();
+
   return (
     <div className="flex flex-col min-h-screen text-foreground overflow-hidden">
       <section className="relative z-10 py-24 flex-grow">
@@ -56,10 +61,10 @@ const HomePage = () => {
                   className="overflow-hidden bg-primary text-primary-foreground px-8 py-6 text-lg font-medium"
                 >
                   <Link
-                    href={"/generate-plan"}
+                    href={isSignedIn ? "/generate-plan" : "/sign-up"}
                     className="flex items-center font-mono"
                   >
-                    Build Your Plan
+                    {isSignedIn ? "Build Your Plan" : "Get Started"}
                     <ArrowRightIcon className="ml-2 size-5" />
                   </Link>
                 </Button>

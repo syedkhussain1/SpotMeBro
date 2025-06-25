@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +18,10 @@ import {
   ShieldIcon,
 } from "lucide-react";
 import { USER_PLANS } from "@/constants";
+import { useUser } from "@clerk/nextjs";
 
 const UserPlan = () => {
+  const { isSignedIn } = useUser();
   return (
     <div className="w-full pb-24 relative">
       <div className="container mx-auto max-w-6xl px-4">
@@ -191,15 +194,6 @@ const UserPlan = () => {
                   </div>
                 </div>
               </CardContent>
-
-              <CardFooter className="px-5 py-4 border-t border-border">
-                <Link href={`/plan/${plans.id}`} className="w-full">
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    View Program Details
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardFooter>
             </Card>
           ))}
         </div>
@@ -211,7 +205,7 @@ const UserPlan = () => {
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg"
             >
-              Generate Your Program
+              {isSignedIn ? "Build Your Plan" : "Get Started"}
               <Sparkles className="ml-2 h-5 w-5" />
             </Button>
           </Link>
